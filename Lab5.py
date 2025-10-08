@@ -9,7 +9,7 @@ pins=[]
 print(f"Started")
 
 for i in range(2,12):
-	GPIO.setup(i,GPIO.OUT,0)
+	GPIO.setup(i,GPIO.OUT, initial=0)
 	pins.append(GPIO.PWM(i,500))
 	pins[i-2].start(0)
 
@@ -39,6 +39,7 @@ try:
 except:
 	print(f"Ending")
 	GPIO.cleanup()
+
 
 
 
