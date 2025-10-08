@@ -16,7 +16,8 @@ GPIO.add_event_detect(
 	bouncetime=(1000))
 
 def change(i):
-	global x=i
+	global x
+	x=i
 
 pins=[]
 
@@ -38,6 +39,7 @@ try:
 except:
 	print(f"Ending")
 	GPIO.cleanup()
+
 
 
 
