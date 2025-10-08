@@ -7,7 +7,8 @@ print(f"Started")
 
 for i in range(2,11):
 	GPIO.setup(i,GPIO.OUT,initial=0)
-	pins.append(obj=GPIO.PWM(i,500))
+	obj=GPIO.PWM(i,500)
+	pins.append(obj)
 	
 
 try:
@@ -18,4 +19,5 @@ try:
 except:
 	print(f"Ending")
 	GPIO.cleanup()
+
 
