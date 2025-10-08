@@ -6,17 +6,18 @@ pins=[]
 
 print(f"Started")
 
-for i in range(2,11):
+for i in range(2,12):
 	GPIO.setup(i,GPIO.OUT,initial=0)
 	pins.append(GPIO.PWM(i,500))
 	
 
 try:
 	while(1):
-		for i in range(10):
+		for i in len(pins):
 			pins[i].ChangeDutyCycle((sin(2*pi*.2*time.time()-i*pi/11))**2)
 
 except KeyboardInterrupt:
 	print(f"Ending")
 	GPIO.cleanup()
+
 
