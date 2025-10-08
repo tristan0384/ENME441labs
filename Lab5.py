@@ -16,9 +16,10 @@ try:
 		for i in range(len(pins)):
 			pins[i].ChangeDutyCycle((sin(2*pi*.2*time.time()-i*pi/11))**2)
 
-except KeyboardInterrupt:
+except:
 	print(f"Ending")
 	GPIO.cleanup()
+
 
 
 
