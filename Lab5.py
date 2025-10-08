@@ -1,6 +1,5 @@
 import RPi.GPIO as GPIO
 import time
-import math
 from math import *
 GPIO.setmode(GPIO.BCM)
 pins=[]
@@ -15,8 +14,9 @@ for i in range(2,11):
 try:
 	while(1):
 		for i in range(10):
-			pins[i].ChangeDutyCycle((sin(2*pi*.2*time.time()-i*pi/11))^2)
+			pins[i].ChangeDutyCycle((sin(2*pi*.2*time.time()-i*pi/11))**2)
 
 except KeyboardInterrupt:
 	print(f"Ending")
 	GPIO.cleanup()
+
