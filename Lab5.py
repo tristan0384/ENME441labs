@@ -9,11 +9,11 @@ pins=[]
 print(f"Started")
 
 for i in range(2,12):
-	GPIO.setup(i,GPIO.OUT,initial=0)
+	GPIO.setup(i,GPIO.OUT,0)
 	pins.append(GPIO.PWM(i,500))
 	pins[i-2].start(0)
 
-GPIO.setup(26,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(26,GPIO.IN,GPIO.PUD_DOWN)
 
 def change(i):
 	global x
@@ -22,13 +22,13 @@ def change(i):
 GPIO.add_event_detect(
 	26,
 	GPIO.RISING,
-	callback=change(-1),
-	bouncetime=(1000))
+	x=-1,
+	1000)
 GPIO.add_event_detect(
 	26,
 	GPIO.RISING,
-	callback=change(1),
-	bouncetime=(1000))
+	x=1,
+	1000)
 
 try:
 	while(1):
@@ -39,6 +39,7 @@ try:
 except:
 	print(f"Ending")
 	GPIO.cleanup()
+
 
 
 
