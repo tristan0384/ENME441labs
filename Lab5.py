@@ -4,6 +4,17 @@ from math import *
 GPIO.setmode(GPIO.BCM)
 x=1
 
+pins=[]
+
+print(f"Started")
+
+for i in range(2,12):
+	GPIO.setup(i,GPIO.OUT,initial=0)
+	pins.append(GPIO.PWM(i,500))
+	pins[i-2].start(0)
+
+GPIO.setup(26,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
+
 def change(i):
 	global x
 	x=i
@@ -19,17 +30,6 @@ GPIO.add_event_detect(
 	callback=change(1),
 	bouncetime=(1000))
 
-pins=[]
-
-print(f"Started")
-
-for i in range(2,12):
-	GPIO.setup(i,GPIO.OUT,initial=0)
-	pins.append(GPIO.PWM(i,500))
-	pins[i-2].start(0)
-
-GPIO.setup(26,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
-
 try:
 	while(1):
 		for i in range(len(pins)):
@@ -39,6 +39,7 @@ try:
 except:
 	print(f"Ending")
 	GPIO.cleanup()
+
 
 
 
