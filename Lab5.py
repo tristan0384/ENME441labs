@@ -6,12 +6,12 @@ x=1
 
 GPIO.add_event_detect(
 	26,
-	gpio.RISING,
+	GPIO.RISING,
 	callback=change(-1),
 	bouncetime=(1000))
 GPIO.add_event_detect(
 	26,
-	gpio.RISING,
+	GPIO.RISING,
 	callback=change(1),
 	bouncetime=(1000))
 
@@ -39,6 +39,7 @@ try:
 except:
 	print(f"Ending")
 	GPIO.cleanup()
+
 
 
 
