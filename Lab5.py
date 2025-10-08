@@ -13,7 +13,7 @@ for i in range(2,12):
 	pins.append(GPIO.PWM(i,500))
 	pins[i-2].start(0)
 
-GPIO.setup(26,GPIO.IN,GPIO.PUD_DOWN)
+GPIO.setup(26,GPIO.IN,GPIO.pull_up_down=PUD_DOWN)
 
 def change(i):
 	global x
@@ -26,11 +26,12 @@ try:
 	while(1):
 		for i in range(len(pins)):
 			#pins[i].ChangeDutyCycle(100)
-			pins[i].ChangeDutyCycle((sin(2*pi*.2*time.time()-i*x*pi/11))**2)
+			pins[i].ChangeDutyCycle(100*(sin(2*pi*.2*time.time()-i*x*pi/11))**2)
 
 except:
 	print(f"Ending")
 	GPIO.cleanup()
+
 
 
 
