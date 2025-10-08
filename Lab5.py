@@ -13,7 +13,7 @@ for i in range(2,12):
 	pins.append(GPIO.PWM(i,500))
 	pins[i-2].start(0)
 
-GPIO.setup(26,GPIO.IN,GPIO.pull_up_down=PUD_DOWN)
+GPIO.setup(26,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
 
 def change(i):
 	global x
@@ -31,6 +31,7 @@ try:
 except:
 	print(f"Ending")
 	GPIO.cleanup()
+
 
 
 
