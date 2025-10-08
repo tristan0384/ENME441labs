@@ -4,6 +4,10 @@ from math import *
 GPIO.setmode(GPIO.BCM)
 x=1
 
+def change(i):
+	global x
+	x=i
+	
 GPIO.add_event_detect(
 	26,
 	GPIO.RISING,
@@ -14,10 +18,6 @@ GPIO.add_event_detect(
 	GPIO.RISING,
 	callback=change(1),
 	bouncetime=(1000))
-
-def change(i):
-	global x
-	x=i
 
 pins=[]
 
@@ -39,6 +39,7 @@ try:
 except:
 	print(f"Ending")
 	GPIO.cleanup()
+
 
 
 
