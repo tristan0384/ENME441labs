@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+import math
 GPIO.setmode(GPIO.BCM)
 pins=[]
 
@@ -18,6 +19,7 @@ try:
 except KeyboardInterrupt:
 	print(f"Ending")
 	GPIO.cleanup()
+
 
 
 
