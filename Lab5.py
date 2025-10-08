@@ -19,16 +19,8 @@ def change(i):
 	global x
 	x=i
 	
-GPIO.add_event_detect(
-	26,
-	GPIO.RISING,
-	callback=change(-1),
-	bouncetime=1000)
-GPIO.add_event_detect(
-	26,
-	GPIO.FALLING,
-	callback=change(1),
-	bouncetime=1000)
+GPIO.add_event_detect(26,GPIO.RISING,callback= lambda chanel: change(-1),bouncetime=1000)
+GPIO.add_event_detect(26,GPIO.FALLING,callback= lambda chanel: change(1),bouncetime=1000)
 
 try:
 	while(1):
@@ -39,6 +31,7 @@ try:
 except:
 	print(f"Ending")
 	GPIO.cleanup()
+
 
 
 
