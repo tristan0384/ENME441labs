@@ -6,9 +6,10 @@ pins=[]
 print(f"Started")
 
 for i in range(2,11):
+	GPIO.setup(i,GPIO.OUT,initial=0)
 	pins.append(obj=GPIO.PWM(i,500))
-	#GPIO.setup(i,GPIO.OUT,initial=0)
 	
+
 try:
 	while(1):
 		for i in range(10):
