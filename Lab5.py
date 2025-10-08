@@ -8,11 +8,13 @@ print(f"Started")
 for i in range(2,11):
 	pins.append(obj=GPIO.PWM(i,500))
 	#GPIO.setup(i,GPIO.OUT,initial=0)
-
-while(1):
-	for i in range(10):
-		pins(i).ChangeDutyCycle((sin(2*pi*.2*time.time()-i*pi/11))^2)
+	
+try:
+	while(1):
+		for i in range(10):
+			pins(i).ChangeDutyCycle((sin(2*pi*.2*time.time()-i*pi/11))^2)
 
 except:
 	print(f"Ending")
 	GPIO.cleanup()
+
