@@ -19,7 +19,7 @@ def change():
 	global x
 	x=x*-1
 	
-GPIO.add_event_detect(19,GPIO.RISING,callback=change(),bouncetime=1000)
+GPIO.add_event_detect(19,GPIO.BOTH,callback=change(),bouncetime=1000)
 
 try:
 	while(1):
@@ -30,6 +30,7 @@ try:
 except:
 	print(f"Ending")
 	GPIO.cleanup()
+
 
 
 
