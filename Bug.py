@@ -23,7 +23,7 @@ class Bug:
 
 	def jump(self):
 		i=0
-		while i<self.x+1:
+		while i != self.x:
 			self.__shifter.shiftByte(1)
 			i=i+1
 
