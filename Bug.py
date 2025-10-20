@@ -31,19 +31,19 @@ class Bug:
 	def start(self):
 	  	val=random.randrange(-1,2,2)
 	  	if self.isWrapOn==False:
-		  	x=x+val
-		  	if x<0 or x>7:
+		  	self.x=self.x+val
+		  	if self.x<0 or self.x>7:
 		  		__shifter.shiftByte(-val)
-		  		x=x-(2*val)
+		  		self.x=self.x-(2*val)
 		  	else:
 		  		__shifter.shiftByte(val)
 		  	time.sleep(self.timestep)
 		else:
-		  	x=x+val
-		  	if x<0 or x>7:
+		  	self.x=self.x+val
+		  	if self.x<0 or self.x>7:
 		  		for i in range(7):
 		  			__shifter.shiftByte(-val)
-		  		x=x-(8*val)
+		  		self.x=self.x-(8*val)
 		  	else:
 		  		__shifter.shiftByte(val)
 		  	time.sleep(self.timestep)
