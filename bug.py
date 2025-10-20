@@ -28,6 +28,8 @@ try:
 			bug.speed(True)
 		else:
 			bug.speed(False)
+			
+		x2old=x2
 
 
 
