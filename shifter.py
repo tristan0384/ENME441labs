@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 import time
-import random
+
 
 
 class Shifter:
@@ -19,16 +19,8 @@ class Shifter:
 
 
 
-  def shiftByte(self):
-    shift=random.randint(1,2)
-    if (shift==1 and not self.pattern == 0b10000000):
-      self.pattern <<=1
-    elif (shift==1 and self.pattern == 0b10000000):
-      self.pattern >>=1
-    if (shift==2 and not self.pattern == 0b00000001):
-      self.pattern >>=1
-    elif (shift==2 and self.pattern == 0b00000001):
-      self.pattern <<=1
+  def shiftByte(self,shift):
+    self.pattern >>=shift
     self._ping()
 
 
