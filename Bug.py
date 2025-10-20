@@ -16,10 +16,7 @@ class Bug:
 			i=i+1
 
 	def wrap(self):
-		if self.isWrapOn==False:
-			self.isWrapOn=True
-		else:
-			self.isWrapOn=False
+		self.isWrapOn= not self.isWrapOn
 
 
 	def speed(self, on):
@@ -32,7 +29,7 @@ class Bug:
 
 
 	def start(self):
-		val=random.randrange(-1,2,2)
+		val=random.choice(-1,1)
 		if self.isWrapOn==False:
 			self.x=self.x+val
 			if self.x<0 or self.x>7:
