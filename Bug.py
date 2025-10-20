@@ -10,6 +10,10 @@ class Bug:
 		self.x=x
 		self.isWrapOn=isWrapOn
 		self.__shifter=shifter.Shifter(23,24,25)
+		i=0
+		while i<self.x+1:
+			self.__shifter.shiftByte(1)
+			i=i+1
 
 	def wrap(self):
 		if self.isWrapOn==False:
@@ -24,10 +28,6 @@ class Bug:
 		else:
 			self.timestep=self.first
 
-	i=0
-	while i<(self.x)+1:
-		self.__shifter.shiftByte(1)
-		i=i+1
 
 
 
