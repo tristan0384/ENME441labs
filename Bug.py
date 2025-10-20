@@ -32,9 +32,12 @@ class Bug:
 		val=random.choice([-1,1])
 		if self.isWrapOn==False:
 			self.x=self.x+val
-			if self.x<0 or self.x>7:
-				self.__shifter.shiftByte(-val)
-				self.x=self.x-(2*val)
+			if self.x < 0:
+				self.x = 1  # bounce back
+				self.__shifter.shiftByte(1)
+			elif self.x > 7:
+				self.x = 6  # bounce back
+				self.__shifter.shiftByte(-1)
 			else:
 				self.__shifter.shiftByte(val)
 			time.sleep(self.timestep)
