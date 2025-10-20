@@ -19,9 +19,9 @@ class Shifter:
 
 
   def shiftByte(self,shift):
-    if direction == 1:
+    if shift == 1:
       self.pattern >>= 1
-    elif direction == -1:
+    elif shift == -1:
       self.pattern <<= 1
     else:
       return
