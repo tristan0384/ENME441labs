@@ -4,13 +4,12 @@ import shifter
 import RPi.GPIO as GPIO
 
 class Bug:
-	def __init__(self,timestep=.1,x=0,isWrapOn=False):
+	def __init__(self,timestep=.1,x=3,isWrapOn=False):
 		self.timestep=timestep
 		self.first=timestep
 		self.x=x
 		self.isWrapOn=isWrapOn
 		self.__shifter=shifter.Shifter(23,24,25)
-
 
 	def wrap(self):
 		self.isWrapOn= not self.isWrapOn
@@ -22,6 +21,13 @@ class Bug:
 		else:
 			self.timestep=self.first
 
+	def jump(self):
+		i=0
+		while i<self.x+1:
+			self.__shifter.shiftByte(1)
+			i=i+1
+
+
 
 
 
@@ -29,12 +35,9 @@ class Bug:
 		val=random.choice([-1,1])
 		if self.isWrapOn==False:
 			self.x=self.x+val
-			if self.x < 0:
-				self.x = 1  # bounce back
-				self.__shifter.shiftByte(1)
-			elif self.x > 7:
-				self.x = 6  # bounce back
-				self.__shifter.shiftByte(-1)
+			if self.x<0 or self.x>7:
+				self.__shifter.shiftByte(-val)
+				self.x=self.x-(2*val)
 			else:
 				self.__shifter.shiftByte(val)
 			time.sleep(self.timestep)
