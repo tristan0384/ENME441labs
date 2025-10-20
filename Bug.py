@@ -4,16 +4,13 @@ import shifter
 import RPi.GPIO as GPIO
 
 class Bug:
-	def __init__(self,timestep=.1,x=3,isWrapOn=False):
+	def __init__(self,timestep=.1,x=0,isWrapOn=False):
 		self.timestep=timestep
 		self.first=timestep
 		self.x=x
 		self.isWrapOn=isWrapOn
 		self.__shifter=shifter.Shifter(23,24,25)
-		i=0
-		while i<self.x+1:
-			self.__shifter.shiftByte(1)
-			i=i+1
+
 
 	def wrap(self):
 		self.isWrapOn= not self.isWrapOn
