@@ -10,5 +10,8 @@ try:
   	shift.shiftByte()
   	time.sleep(.05)
 
-except:
+except KeyboardInterupt:
   GPIO.cleanup()
+
+finally:
+    GPIO.cleanup()
