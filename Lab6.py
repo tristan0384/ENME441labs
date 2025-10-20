@@ -1,7 +1,7 @@
 import time
-import shifter.py
+import shifter
 
-shift = Shifter(23,24,25)
+shift = shifter.Shifter(23,24,25)
 
 
 try:
