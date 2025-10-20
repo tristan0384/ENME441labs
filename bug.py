@@ -10,7 +10,7 @@ GPIO.setup(21, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 bug=Bug.Bug()
 x2old=GPIO.input(20)
-
+bug.jump()
 
 try:
 	while(1):
