@@ -29,7 +29,7 @@ class Bug:
 
 
 	def start(self):
-		val=random.choice(-1,1)
+		val=random.choice([-1,1])
 		if self.isWrapOn==False:
 			self.x=self.x+val
 			if self.x<0 or self.x>7:
