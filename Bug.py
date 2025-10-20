@@ -38,7 +38,7 @@ class Bug:
 		  	else:
 		  		__shifter.shiftByte(val)
 		  	time.sleep(self.timestep)
-		 else:
+		else:
 		  	self.x=self.x+val
 		  	if self.x<0 or self.x>7:
 		  		for i in range(7):
