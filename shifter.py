@@ -19,22 +19,22 @@ class Shifter:
 
 
 
-  def shiftByte():
+  def shiftByte(self):
     shift=random.randint(1,2)
     if (shift==1 and not self.pattern == 0b10000000):
-      pattern <<=1
+      self.pattern <<=1
     elif (shift==1 and self.pattern == 0b10000000):
-      pattern >>=1
+      self.pattern >>=1
     if (shift==2 and not self.pattern == 0b00000001):
-      pattern >>=1
+      self.pattern >>=1
     elif (shift==2 and self.pattern == 0b00000001):
-      pattern <<=1
+      self.pattern <<=1
     self._ping()
 
 
 
 
-  def _ping():
+  def _ping(self):
     for i in range(8):
       GPIO.output(self.serialPin, self.pattern & (1<<i))
       GPIO.output(self.clockPin,1)       # ping the clock pin to shift register data
