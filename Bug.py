@@ -24,6 +24,10 @@ class Bug:
 		else:
 			self.timestep=self.first
 
+	i=0
+	while i<self.x+1:
+		self.__shifter.shiftByte(1)
+		i=i+1
 
 
 
