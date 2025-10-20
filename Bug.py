@@ -9,8 +9,7 @@ class Bug:
 		self.first=timestep
 		self.x=x
 		self.isWrapOn=isWrapOn
-
-	__shifter=shifter.Shifter(23,24,25)
+		self.__shifter=shifter.Shifter(23,24,25)
 
 	def wrap(self):
 		if self.isWrapOn==False:
@@ -31,22 +30,22 @@ class Bug:
 	def start(self):
 		val=random.randrange(-1,2,2)
 		if self.isWrapOn==False:
-		  	self.x=self.x+val
-		  	if self.x<0 or self.x>7:
-		  		self.__shifter.shiftByte(-val)
-		  		self.x=self.x-(2*val)
-		  	else:
-		  		self.__shifter.shiftByte(val)
-		  	time.sleep(self.timestep)
-		else:
-		  	self.x=self.x+val
-		  	if self.x<0 or self.x>7:
-		  		for i in range(7):
-		  			self.__shifter.shiftByte(-val)
-		  		self.x=self.x-(8*val)
+			self.x=self.x+val
+			if self.x<0 or self.x>7:
+				self.__shifter.shiftByte(-val)
+				self.x=self.x-(2*val)
 			else:
-		  		self.__shifter.shiftByte(val)
-		  	time.sleep(self.timestep)
+				self.__shifter.shiftByte(val)
+			time.sleep(self.timestep)
+		else:
+			self.x=self.x+val
+			if self.x<0 or self.x>7:
+				for i in range(7):
+					self.__shifter.shiftByte(-val)
+				self.x=self.x-(8*val)
+			else:
+				self.__shifter.shiftByte(val)
+			time.sleep(self.timestep)
 
 
 	def stop(self):
