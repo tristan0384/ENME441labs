@@ -1,0 +1,51 @@
+import RPi.GPIO as GPIO
+import time
+import random
+
+
+class Shifter:
+  def __init__(self, serialPin, latchPin, clockPin):
+    self.serialPin=serialPin
+    self.clockPin=clockPin
+    self.latchPin=latchPin
+    self.pattern=0b10000000
+
+    GPIO.setmode(GPIO.BCM)
+
+
+    GPIO.setup(dataPin, GPIO.OUT)
+    GPIO.setup(latchPin, GPIO.OUT, initial=0)  # start latch & clock low
+    GPIO.setup(clockPin, GPIO.OUT, initial=0)  
+
+
+
+    def shiftByte():
+      shift=random.randint(1,2)
+      if (shift==1 and not self.pattern == 0b10000000):
+        pattern <<=1
+      elif (shift==1 and self.pattern == 0b10000000):
+        pattern >>=1
+      if (shift==2 and not self.pattern == 0b00000001):
+        pattern >>=1
+      elif (shift==2 and self.pattern == 0b00000001):
+        pattern <<=1
+      self._ping()
+
+
+
+
+    def _ping():
+      for i in range(8):
+        GPIO.output(self.serialPin, self.pattern & (1<<i))
+        GPIO.output(self.clockPin,1)       # ping the clock pin to shift register data
+        time.sleep(0)
+        GPIO.output(self.clockPin,0)
+
+      GPIO.output(self.latchPin, 1)        # ping the latch pin to send register to output
+      time.sleep(0)
+      GPIO.output(self.latchPin, 0)
+
+    try:
+      while 1: pass
+    except:
+      GPIO.cleanup()
