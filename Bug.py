@@ -52,13 +52,13 @@ class Bug:
 	def stop(self):
 		pattern=0b00000000
 		for i in range(8):
-	      GPIO.output(23, pattern & (1<<i))
-	      GPIO.output(25,1)       # ping the clock pin to shift register data
-	      time.sleep(0)
-	      GPIO.output(25,0)
-	    GPIO.output(24, 1)        # ping the latch pin to send register to output
-	    time.sleep(0)
-	    GPIO.output(24, 0)
+		  GPIO.output(23, pattern & (1<<i))
+		  GPIO.output(25,1)       # ping the clock pin to shift register data
+		  time.sleep(0)
+		  GPIO.output(25,0)
+		GPIO.output(24, 1)        # ping the latch pin to send register to output
+		time.sleep(0)
+		GPIO.output(24, 0)
 
 
 
