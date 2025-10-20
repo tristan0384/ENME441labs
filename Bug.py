@@ -33,19 +33,19 @@ class Bug:
 		if self.isWrapOn==False:
 		  	self.x=self.x+val
 		  	if self.x<0 or self.x>7:
-		  		__shifter.shiftByte(-val)
+		  		self.__shifter.shiftByte(-val)
 		  		self.x=self.x-(2*val)
 		  	else:
-		  		__shifter.shiftByte(val)
+		  		self.__shifter.shiftByte(val)
 		  	time.sleep(self.timestep)
 		else:
 		  	self.x=self.x+val
 		  	if self.x<0 or self.x>7:
 		  		for i in range(7):
-		  			__shifter.shiftByte(-val)
+		  			self.__shifter.shiftByte(-val)
 		  		self.x=self.x-(8*val)
-		  	else:
-		  		__shifter.shiftByte(val)
+			else:
+		  		self.__shifter.shiftByte(val)
 		  	time.sleep(self.timestep)
 
 
