@@ -1,5 +1,6 @@
 import time
 import shifter
+import RPi.GPIO as GPIO
 
 shift = shifter.Shifter(23,24,25)
 
