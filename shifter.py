@@ -2,7 +2,6 @@ import RPi.GPIO as GPIO
 import time
 
 
-
 class Shifter:
   def __init__(self, serialPin, latchPin, clockPin):
     self.serialPin=serialPin
@@ -20,7 +19,12 @@ class Shifter:
 
 
   def shiftByte(self,shift):
-    self.pattern >>=shift
+    if direction == 1:
+      self.pattern >>= 1
+    elif direction == -1:
+      self.pattern <<= 1
+    else:
+      return
     self._ping()
 
 
