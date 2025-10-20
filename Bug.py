@@ -46,7 +46,7 @@ class Bug:
 			if self.x<0 or self.x>7:
 				for i in range(7):
 					self.__shifter.shiftByte(-val)
-				self.x=self.x-(8*val)
+				self.x%=8
 			else:
 				self.__shifter.shiftByte(val)
 			time.sleep(self.timestep)
