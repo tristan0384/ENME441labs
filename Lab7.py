@@ -1,22 +1,22 @@
 import RPi.GPIO as GPIO
 import socket
 
-# --- GPIO setup ---
+
 GPIO.setmode(GPIO.BCM)
-led_pins = [23, 24, 25]  # LED1, LED2, LED3 (change to your pins)
+led_pins = [23, 24, 25]
 for pin in led_pins:
     GPIO.setup(pin, GPIO.OUT)
 
-# Create PWM objects (1kHz frequency)
-pwm_leds = [GPIO.PWM(pin, 100) for pin in led_pins]
+
+pwm_leds = [GPIO.PWM(pin, 1000) for pin in led_pins]
 for pwm in pwm_leds:
     pwm.start(0)
 
 # Brightness values
-led_brightness = [0, 0, 0]  # starting brightness in percent
-selected_led = 0             # default LED 1
+led_brightness = [0, 0, 0]  
+selected_led = 0            
 
-# --- Webpage function ---
+
 def web_page():
     html = f"""
     <html>
@@ -85,7 +85,7 @@ def web_page():
 
 
 
-# --- Web server setup ---
+
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind(('', 80))
 s.listen(3)
@@ -96,14 +96,10 @@ def serve_web_page():
     while True:
         print('Waiting for connection...')
         conn, addr = s.accept()
-        print('Connection from', addr)
         request = conn.recv(1024).decode('utf-8')
-        print('\nGET request:\n--------------------')
-        print(request)
 
         data = request[request.find('GET')+6 : request.find('HTTP')]
         if len(data) > 0:
-            # --- Parse LED selection ---
             if "led=1" in data:
                 selected_led = 0
             elif "led=2" in data:
@@ -111,7 +107,6 @@ def serve_web_page():
             elif "led=3" in data:
                 selected_led = 2
 
-            # --- Parse brightness value ---
             if "brightness=" in data:
                 try:
                     value = int(data.split("brightness=")[1].split("&")[0])
