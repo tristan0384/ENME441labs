@@ -61,11 +61,11 @@ def web_page():
     </head>
     <body>
       <div class="box">
-        <label for="brightness">Brightness level:</label><br>
-        <input type="range" id="brightness" name="brightness" min="0" max="100" value="{led_brightness[selected_led]}"><br><br>
-
-        <label>Select LED:</label><br>
         <form action="/" method="GET">
+          <label for="brightness">Brightness level:</label><br>
+          <input type="range" id="brightness" name="brightness" min="0" max="100" value="{led_brightness[selected_led]}"><br><br>
+
+          <label>Select LED:</label><br>
           <input type="radio" id="led1" name="led" value="1" {"checked" if selected_led == 0 else ""}>
           <label for="led1">LED 1 ({led_brightness[0]}%)</label><br>
 
@@ -82,6 +82,7 @@ def web_page():
     </html>
     """
     return html.encode('utf-8')
+
 
 
 # --- Web server setup ---
