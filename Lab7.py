@@ -18,34 +18,34 @@ selected_led = 0             # default LED 1
 
 # --- Webpage function ---
 def web_page():
-    html = """
+    html = f"""
     <html>
     <head>
       <title>LED Brightness Control</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="icon" href="data:,">
       <style>
-        html {
+        html {{
           font-family: Helvetica;
           display: inline-block;
           margin: 0px auto;
           text-align: center;
-        }
-        .box {
+        }}
+        .box {{
           border: 1px solid #888;
           border-radius: 6px;
           padding: 10px;
           display: inline-block;
           background-color: #f9f9f9;
           text-align: left;
-        }
-        label {
+        }}
+        label {{
           font-weight: bold;
-        }
-        input[type=range] {
+        }}
+        input[type=range] {{
           width: 100%;
-        }
-        button {
+        }}
+        button {{
           margin-top: 8px;
           width: 100%;
           padding: 6px;
@@ -53,43 +53,34 @@ def web_page():
           border-radius: 4px;
           background-color: #eee;
           cursor: pointer;
-        }
-        button:hover {
+        }}
+        button:hover {{
           background-color: #ddd;
-        }
+        }}
       </style>
     </head>
     <body>
       <div class="box">
         <label for="brightness">Brightness level:</label><br>
-        <input type="range" id="brightness" name="brightness" min="0" max="100" value="%s"><br><br>
+        <input type="range" id="brightness" name="brightness" min="0" max="100" value="{led_brightness[selected_led]}"><br><br>
 
         <label>Select LED:</label><br>
         <form action="/" method="GET">
-          <input type="radio" id="led1" name="led" value="1" %s>
-          <label for="led1">LED 1 (%s%%)</label><br>
+          <input type="radio" id="led1" name="led" value="1" {"checked" if selected_led == 0 else ""}>
+          <label for="led1">LED 1 ({led_brightness[0]}%)</label><br>
 
-          <input type="radio" id="led2" name="led" value="2" %s>
-          <label for="led2">LED 2 (%s%%)</label><br>
+          <input type="radio" id="led2" name="led" value="2" {"checked" if selected_led == 1 else ""}>
+          <label for="led2">LED 2 ({led_brightness[1]}%)</label><br>
 
-          <input type="radio" id="led3" name="led" value="3" %s>
-          <label for="led3">LED 3 (%s%%)</label><br><br>
+          <input type="radio" id="led3" name="led" value="3" {"checked" if selected_led == 2 else ""}>
+          <label for="led3">LED 3 ({led_brightness[2]}%)</label><br><br>
 
           <button type="submit" name="change">Change Brightness</button>
         </form>
       </div>
     </body>
     </html>
-    """ % (
-        led_brightness[selected_led],
-        "checked" if selected_led == 0 else "",
-        led_brightness[0],
-        "checked" if selected_led == 1 else "",
-        led_brightness[1],
-        "checked" if selected_led == 2 else "",
-        led_brightness[2],
-    )
-
+    """
     return html.encode('utf-8')
 
 
