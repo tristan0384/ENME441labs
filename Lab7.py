@@ -8,12 +8,12 @@ for pin in led_pins:
     GPIO.setup(pin, GPIO.OUT)
 
 # Create PWM objects (1kHz frequency)
-pwm_leds = [GPIO.PWM(pin, 1000) for pin in led_pins]
+pwm_leds = [GPIO.PWM(pin, 100) for pin in led_pins]
 for pwm in pwm_leds:
     pwm.start(0)
 
 # Brightness values
-led_brightness = [0, 28, 0]  # starting brightness in percent
+led_brightness = [0, 0, 0]  # starting brightness in percent
 selected_led = 0             # default LED 1
 
 # --- Webpage function ---
@@ -141,7 +141,4 @@ def serve_web_page():
 try:
     serve_web_page()
 except KeyboardInterrupt:
-    for pwm in pwm_leds:
-        pwm.stop()
     GPIO.cleanup()
-    print("\nServer stopped.")
