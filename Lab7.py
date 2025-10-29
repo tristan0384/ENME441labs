@@ -112,7 +112,6 @@ def serve_web_page():
                     value = int(data.split("brightness=")[1].split("&")[0])
                     led_brightness[selected_led] = value
                     pwm_leds[selected_led].ChangeDutyCycle(value)
-                    print("LED %d brightness set to %d%%" % (selected_led + 1, value))
                 except:
                     pass
 
