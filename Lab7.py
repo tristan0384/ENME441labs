@@ -132,4 +132,6 @@ def serve_web_page():
 try:
     serve_web_page()
 except KeyboardInterrupt:
+    for pwm in pwm_leds:
+        pwm.stop()
     GPIO.cleanup()
