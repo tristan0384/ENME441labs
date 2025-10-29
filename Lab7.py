@@ -12,7 +12,7 @@ pwm_leds = [GPIO.PWM(pin, 1000) for pin in led_pins]
 for pwm in pwm_leds:
     pwm.start(0)
 
-# Brightness values
+
 led_brightness = [0, 0, 0]  
 selected_led = 0            
 
