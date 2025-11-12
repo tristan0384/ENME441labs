@@ -39,7 +39,7 @@ class Stepper:
     delay = 1200          # delay between motor steps [us]
     steps_per_degree = 4096/360    # 4096 steps/rev * 1/360 rev/deg
 
-    manager = Manager()
+    manager = multiprocessing.Manager()
     call= manager.Value('i',0)
     count=manager.Value('i',0)
 
