@@ -38,8 +38,10 @@ class Stepper:
     seq = [0b0001,0b0011,0b0010,0b0110,0b0100,0b1100,0b1000,0b1001] # CCW sequence
     delay = 1200          # delay between motor steps [us]
     steps_per_degree = 4096/360    # 4096 steps/rev * 1/360 rev/deg
-    call=0
-    count=0
+
+    manager = Manager()
+    call= manager.Value('i',0)
+    count=manager.Value('i',0)
 
     def __init__(self, shifter, lock):
         self.s = shifter           # shift register
@@ -61,12 +63,12 @@ class Stepper:
         self.step_state %= 8      # ensure result stays in [0,7]
         Stepper.shifter_outputs |= 0b1111<<self.shifter_bit_start
         Stepper.shifter_outputs &= Stepper.seq[self.step_state]<<self.shifter_bit_start
-        Stepper.count+=1
+        Stepper.count.value+=1
         if Stepper.count>=Stepper.call:
             self.s.shiftByte(Stepper.shifter_outputs)
             self.angle += dir/Stepper.steps_per_degree
             self.angle %= 360         # limit to [0,359.9+] range
-            Stepper.count=0
+            Stepper.count.value=0
 
     # Move relative angle from current position:
     def __rotate(self, delta):
@@ -76,13 +78,13 @@ class Stepper:
         for s in range(numSteps):      # take the steps
             self.__step(dir)
             time.sleep(Stepper.delay/1e6)
-        Stepper.call -=1
+        Stepper.call.value -=1
         self.lock.release()
 
     # Move relative angle from current position:
     def rotate(self, delta):
         time.sleep(0.1)
-        Stepper.call += 1
+        Stepper.call.value += 1
         p = multiprocessing.Process(target=self.__rotate, args=(delta,))
         p.start()
 
