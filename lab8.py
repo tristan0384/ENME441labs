@@ -39,10 +39,6 @@ class Stepper:
     delay = 1200          # delay between motor steps [us]
     steps_per_degree = 4096/360    # 4096 steps/rev * 1/360 rev/deg
 
-    manager = multiprocessing.Manager()
-    call= manager.Value('i',0)
-    count=manager.Value('i',0)
-
     def __init__(self, shifter, lock):
         self.s = shifter           # shift register
         self.angle = 0             # current output shaft angle
@@ -61,14 +57,12 @@ class Stepper:
     def __step(self, dir):
         self.step_state += dir    # increment/decrement the step
         self.step_state %= 8      # ensure result stays in [0,7]
-        Stepper.shifter_outputs |= 0b1111<<self.shifter_bit_start
         Stepper.shifter_outputs &= Stepper.seq[self.step_state]<<self.shifter_bit_start
-        Stepper.count.value+=1
-        if Stepper.count.value>=Stepper.call.value:
-            self.s.shiftByte(Stepper.shifter_outputs)
-            self.angle += dir/Stepper.steps_per_degree
-            self.angle %= 360         # limit to [0,359.9+] range
-            Stepper.count.value=0
+        Stepper.shifter_outputs |= 0b1111<<self.shifter_bit_start
+        self.s.shiftByte(Stepper.shifter_outputs)
+        self.angle += dir/Stepper.steps_per_degree
+        self.angle %= 360         # limit to [0,359.9+] range
+
 
     # Move relative angle from current position:
     def __rotate(self, delta):
@@ -78,13 +72,11 @@ class Stepper:
         for s in range(numSteps):      # take the steps
             self.__step(dir)
             time.sleep(Stepper.delay/1e6)
-        Stepper.call.value -=1
         self.lock.release()
 
     # Move relative angle from current position:
     def rotate(self, delta):
         time.sleep(0.1)
-        Stepper.call.value += 1
         p = multiprocessing.Process(target=self.__rotate, args=(delta,))
         p.start()
 
