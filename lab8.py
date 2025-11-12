@@ -82,7 +82,11 @@ class Stepper:
 
     # Move to an absolute angle taking the shortest possible path:
     def goAngle(self, angle):
-         pass
+        dif=self.angle-angle
+        dif %=360
+        if dif > 180:
+            dif-=360
+        self.rotate(dif)
          # COMPLETE THIS METHOD FOR LAB 8
 
     # Set the motor zero point
@@ -108,20 +112,15 @@ if __name__ == '__main__':
     # Zero the motors:
     m1.zero()
     m2.zero()
+    m1.goAngle(90)
+    m1.goAngle(-45)
+    m2.goAngle(-90)
+    m2.goAngle(45)
+    m1.goAngle(-135)
+    m1.goAngle(135)
+    m1.goAngle(0)
 
-    # Move as desired, with eacg step occuring as soon as the previous 
-    # step ends:
-    m1.rotate(-90)
-    m1.rotate(45)
-    m1.rotate(-90)
-    m1.rotate(45)
-
-    # If separate multiprocessing.lock objects are used, the second motor
-    # will run in parallel with the first motor:
-    m2.rotate(180)
-    m2.rotate(-45)
-    m2.rotate(45)
-    m2.rotate(-90)
+  
  
     # While the motors are running in their separate processes, the main
     # code can continue doing its thing: 
